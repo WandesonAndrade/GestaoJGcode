@@ -1,4 +1,6 @@
+import { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { FirestoreService } from './services/firestoreService';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { ClientLoginPage } from './pages/auth/ClientLoginPage';
 import { AdminLoginPage } from './pages/auth/AdminLoginPage';
@@ -27,8 +29,11 @@ function RootRedirect() {
 
   return <Navigate to={user.role === 'admin' ? '/admin' : '/cliente'} replace />;
 }
-
 export function App() {
+  useEffect(() => {
+    FirestoreService.cleanupLegacyDemoFromFirestore();
+  }, []);
+
   return (
     <AuthProvider>
       <BrowserRouter>

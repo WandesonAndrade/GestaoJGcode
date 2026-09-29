@@ -55,186 +55,10 @@ const INITIAL_USERS: SystemUser[] = [
   },
 ];
 
-const INITIAL_CLIENTS: Client[] = [
-  {
-    id: 'cli-1',
-    name: 'Padaria & Confeitaria Pão de Ouro',
-    companyName: 'Pão de Ouro Alimentos Ltda',
-    cpfCnpj: '12.345.678/0001-90',
-    email: 'contato@paodeouro.com.br',
-    phone: '(11) 98765-4321',
-    address: 'Av. Paulista, 1200 - São Paulo, SP',
-    active: true,
-    createdAt: '2026-08-10T10:00:00Z',
-  },
-  {
-    id: 'cli-2',
-    name: 'Dr. Roberto Silva',
-    companyName: 'Consultório Odontológico Silva',
-    cpfCnpj: '123.456.789-00',
-    email: 'roberto@drrobertosilva.com.br',
-    phone: '(11) 97777-8888',
-    address: 'Rua Bela Cintra, 450 - São Paulo, SP',
-    active: true,
-    createdAt: '2026-08-20T14:30:00Z',
-  },
-];
-
-const INITIAL_PROJECTS: Project[] = [
-  {
-    id: 'proj-1',
-    clientId: 'cli-1',
-    clientName: 'Padaria & Confeitaria Pão de Ouro',
-    name: 'Perfil Google Meu Negócio & Presença Local',
-    description: 'Criação, verificação e SEO do perfil no Google Maps, catálogo de fotos profissionais e integração do cardápio.',
-    serviceType: 'GMB',
-    publishedLink: 'https://maps.google.com/?cid=1029384756',
-    publicationNotes: 'Perfil 100% otimizado com selo verificado e 15 avaliações iniciais.',
-    status: 'ENTREGUE',
-    imageUrl: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=600&auto=format&fit=crop&q=80',
-    technicalDetails: {
-      deployPlatform: 'Google My Business',
-      domainManagement: 'NAO_APLICA',
-      database: 'Sem Banco / Site Estático',
-      technicalNotes: 'Perfil com selo de verificação oficial pelo Google.',
-    },
-    createdAt: '2026-08-12T11:00:00Z',
-  },
-  {
-    id: 'proj-2',
-    clientId: 'cli-1',
-    clientName: 'Padaria & Confeitaria Pão de Ouro',
-    name: 'Site Institucional & Encomendas Online',
-    description: 'Desenvolvimento de landing page moderna em React, cardápio responsivo e botão direto para WhatsApp.',
-    serviceType: 'SITE',
-    publishedLink: 'https://paodeouro.com.br',
-    publicationNotes: 'Deploy na Vercel com certificado SSL e integração ao Analytics.',
-    status: 'EM_DESENVOLVIMENTO',
-    imageUrl: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&auto=format&fit=crop&q=80',
-    technicalDetails: {
-      deployPlatform: 'Vercel',
-      domainName: 'paodeouro.com.br',
-      domainManagement: 'JGCODE_RESPONSAVEL',
-      dnsProvider: 'Cloudflare',
-      database: 'Firebase Firestore',
-      emailProvider: 'Titan Mail',
-      technicalNotes: 'Domínio anual renovado até 2027.',
-    },
-    createdAt: '2026-08-15T15:00:00Z',
-  },
-  {
-    id: 'proj-3',
-    clientId: 'cli-2',
-    clientName: 'Dr. Roberto Silva',
-    name: 'E-mail Corporativo & Domínio Profissional',
-    description: 'Configuração do domínio @drrobertosilva.com.br, caixas de e-mail profissionais com proteção anti-spam e SPF/DKIM.',
-    serviceType: 'EMAIL_PRO',
-    publishedLink: 'https://mail.drrobertosilva.com.br',
-    publicationNotes: 'Registros MX, SPF, DMARC e DKIM validados no Cloudflare.',
-    status: 'SETUP_INICIAL',
-    imageUrl: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&auto=format&fit=crop&q=80',
-    technicalDetails: {
-      deployPlatform: 'Cloudflare Workers',
-      domainName: 'drrobertosilva.com.br',
-      domainManagement: 'CLIENTE_COM_ACESSO',
-      dnsProvider: 'Cloudflare',
-      emailProvider: 'Google Workspace',
-      database: 'Sem Banco / Site Estático',
-      technicalNotes: 'Cliente forneceu acesso do Registro.br para apontamento no Cloudflare.',
-    },
-    createdAt: '2026-08-22T09:00:00Z',
-  },
-];
-
-const INITIAL_PLANS: PaymentPlan[] = [
-  {
-    id: 'plan-1',
-    projectId: 'proj-1',
-    projectName: 'Perfil Google Meu Negócio & Presença Local',
-    clientId: 'cli-1',
-    type: 'RECORRENTE',
-    totalAmount: 180.00,
-    recurrenceIntervalDays: 30,
-    createdAt: '2026-08-12T11:00:00Z',
-  },
-  {
-    id: 'plan-2',
-    projectId: 'proj-2',
-    projectName: 'Site Institucional & Encomendas Online',
-    clientId: 'cli-1',
-    type: 'PARCELADO',
-    totalAmount: 1500.00,
-    installments: 3,
-    createdAt: '2026-08-15T15:00:00Z',
-  },
-  {
-    id: 'plan-3',
-    projectId: 'proj-3',
-    projectName: 'E-mail Corporativo & Domínio Profissional',
-    clientId: 'cli-2',
-    type: 'AVISTA',
-    totalAmount: 390.00,
-    createdAt: '2026-08-22T09:00:00Z',
-  }
-];
-
-const INITIAL_PAYMENTS: Payment[] = [
-  {
-    id: 'pay-1',
-    planId: 'plan-1',
-    projectId: 'proj-1',
-    projectName: 'Perfil Google Meu Negócio & Presença Local',
-    clientId: 'cli-1',
-    title: 'Mensalidade Suporte & Monitoramento GMB',
-    amount: 180.00,
-    installmentLabel: 'Mensalidade Outubro/2026',
-    dueDate: '2026-10-10',
-    status: 'PENDING',
-    createdAt: '2026-09-25T10:00:00Z',
-  },
-  {
-    id: 'pay-2',
-    planId: 'plan-2',
-    projectId: 'proj-2',
-    projectName: 'Site Institucional & Encomendas Online',
-    clientId: 'cli-1',
-    title: 'Desenvolvimento de Site Institucional',
-    amount: 500.00,
-    installmentLabel: 'Parcela 1 de 3',
-    dueDate: '2026-09-15',
-    status: 'PAID',
-    paidAt: '2026-09-14T16:20:00Z',
-    gateway: 'mercadopago',
-    createdAt: '2026-08-15T15:00:00Z',
-  },
-  {
-    id: 'pay-3',
-    planId: 'plan-2',
-    projectId: 'proj-2',
-    projectName: 'Site Institucional & Encomendas Online',
-    clientId: 'cli-1',
-    title: 'Desenvolvimento de Site Institucional',
-    amount: 500.00,
-    installmentLabel: 'Parcela 2 de 3',
-    dueDate: '2026-10-15',
-    status: 'PENDING',
-    createdAt: '2026-08-15T15:00:00Z',
-  },
-  {
-    id: 'pay-4',
-    planId: 'plan-3',
-    projectId: 'proj-3',
-    projectName: 'E-mail Corporativo & Domínio Profissional',
-    clientId: 'cli-2',
-    title: 'Setup e Configuração Domínio e E-mails',
-    amount: 390.00,
-    installmentLabel: 'Pagamento Único',
-    dueDate: '2026-09-05',
-    status: 'MANUAL',
-    paidAt: '2026-09-04T11:00:00Z',
-    createdAt: '2026-08-22T09:00:00Z',
-  }
-];
+const INITIAL_CLIENTS: Client[] = [];
+const INITIAL_PROJECTS: Project[] = [];
+const INITIAL_PLANS: PaymentPlan[] = [];
+const INITIAL_PAYMENTS: Payment[] = [];
 
 export class StorageService {
   private static getItem<T>(key: string, defaultData: T): T {
@@ -244,7 +68,27 @@ export class StorageService {
         localStorage.setItem(key, JSON.stringify(defaultData));
         return defaultData;
       }
-      return JSON.parse(item);
+      const parsed = JSON.parse(item);
+
+      // Limpeza definitiva de resíduos dos clientes/projetos fakes antigos do protótipo
+      if (key === STORAGE_KEYS.CLIENTS && Array.isArray(parsed) && parsed.some((c: any) => c.id === 'cli-1' || c.id === 'cli-2')) {
+        localStorage.setItem(key, JSON.stringify([]));
+        return [] as unknown as T;
+      }
+      if (key === STORAGE_KEYS.PROJECTS && Array.isArray(parsed) && parsed.some((p: any) => p.id === 'proj-1' || p.id === 'proj-2' || p.id === 'proj-3')) {
+        localStorage.setItem(key, JSON.stringify([]));
+        return [] as unknown as T;
+      }
+      if (key === STORAGE_KEYS.PAYMENTS && Array.isArray(parsed) && parsed.some((pay: any) => pay.id === 'pay-1' || pay.id === 'pay-2' || pay.id === 'pay-3' || pay.id === 'pay-4')) {
+        localStorage.setItem(key, JSON.stringify([]));
+        return [] as unknown as T;
+      }
+      if (key === STORAGE_KEYS.PLANS && Array.isArray(parsed) && parsed.some((plan: any) => plan.id === 'plan-1' || plan.id === 'plan-2' || plan.id === 'plan-3')) {
+        localStorage.setItem(key, JSON.stringify([]));
+        return [] as unknown as T;
+      }
+
+      return parsed;
     } catch {
       return defaultData;
     }

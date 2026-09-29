@@ -4,7 +4,6 @@ import { useAuth } from '../../contexts/AuthContext';
 import { useCpfCnpj } from '../../hooks/useCpfCnpj';
 import { LoginCard } from '../../components/layout/LoginCard';
 import { LoginVisualSidebar } from '../../components/layout/LoginVisualSidebar';
-import { DividerWithText } from '../../components/common/DividerWithText';
 import { 
   ArrowRight, 
   IdCard, 
@@ -20,7 +19,7 @@ export const ClientLoginPage: React.FC = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const { value: cpfCnpj, docType, inputId, handleChange, setValue, validate } = useCpfCnpj('');
+  const { value: cpfCnpj, docType, inputId, handleChange, validate } = useCpfCnpj('');
   const { loginClient } = useAuth();
   const navigate = useNavigate();
 
@@ -42,11 +41,6 @@ export const ClientLoginPage: React.FC = () => {
     } else {
       setError(res.message || 'CPF ou CNPJ não encontrado no sistema.');
     }
-  };
-
-  const fillQuickDemo = (doc: string) => {
-    setError('');
-    setValue(doc);
   };
 
   const clientSidebar = (
@@ -173,46 +167,6 @@ export const ClientLoginPage: React.FC = () => {
             )}
           </button>
         </form>
-
-        {/* Divisor Reutilizável */}
-        <DividerWithText>ou acesse como demonstração</DividerWithText>
-
-        {/* Atalhos Rápidos */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-          <button
-            type="button"
-            onClick={() => fillQuickDemo('12.345.678/0001-90')}
-            className="p-2.5 rounded-2xl bg-[#F5F5F7] hover:bg-blue-50 border border-[#E5E5EA] hover:border-blue-200 text-left transition-all flex items-center justify-between group focus:outline-none focus:ring-2 focus:ring-apple-blue"
-            aria-label="Acessar com credenciais de demonstração da Padaria Pão de Ouro"
-          >
-            <div className="truncate pr-2">
-              <span className="text-xs font-bold text-[#1D1D1F] block truncate group-hover:text-apple-blue transition-colors">
-                Padaria Pão de Ouro
-              </span>
-              <span className="text-[10px] text-[#86868B]">CNPJ • Faturas abertas</span>
-            </div>
-            <span className="text-[10px] font-bold text-apple-blue bg-white px-2 py-0.5 rounded-full border border-gray-200 shadow-2xs">
-              Usar
-            </span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => fillQuickDemo('123.456.789-00')}
-            className="p-2.5 rounded-2xl bg-[#F5F5F7] hover:bg-blue-50 border border-[#E5E5EA] hover:border-blue-200 text-left transition-all flex items-center justify-between group focus:outline-none focus:ring-2 focus:ring-apple-blue"
-            aria-label="Acessar com credenciais de demonstração do Dr. Roberto Silva"
-          >
-            <div className="truncate pr-2">
-              <span className="text-xs font-bold text-[#1D1D1F] block truncate group-hover:text-apple-blue transition-colors">
-                Dr. Roberto Silva
-              </span>
-              <span className="text-[10px] text-[#86868B]">CPF • Tudo quitado</span>
-            </div>
-            <span className="text-[10px] font-bold text-apple-blue bg-white px-2 py-0.5 rounded-full border border-gray-200 shadow-2xs">
-              Usar
-            </span>
-          </button>
-        </div>
       </div>
 
       {/* Rodapé: Link discreto para equipe */}

@@ -1,0 +1,25 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Regras para Clientes
+    match /clients/{clientId} {
+      allow read, write: if true; // No modo Spark/MVP sem autenticação por claim, ou configure de acordo com seu ambiente
+    }
+
+    // Regras para Projetos
+    match /projects/{projectId} {
+      allow read, write: if true;
+    }
+
+    // Regras para Planos de Pagamento
+    match /plans/{planId} {
+      allow read, write: if true;
+    }
+
+    // Regras para Pagamentos / Faturas
+    match /payments/{paymentId} {
+      allow read, write: if true;
+    }
+  }
+}
